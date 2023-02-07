@@ -77,10 +77,21 @@ class PuzzleBoard:
         if not (curIndex == 2 or curIndex == 5 or curIndex == 8):
             tempState = self.nextStateHelper(curIndex, copyState, 1)
             nextStates.append(PuzzleBoard(tempState, self.pathCost + 1))
-        
         return nextStates
             
     
+    def solvable(self):
+        count = 0
+        tempState = self.state.copy()
+        tempState.remove(0)
+        for i in range(len(tempState) - 1):
+            for j in tempState[i:]:
+                if j < tempState[i]:
+                    count+=1
+        if count%2 != 0:
+            return False 
+        else:
+            return True 
     
     def __str__(self):
         return f"{self.state[:3]}\n{self.state[3:6]}\n{self.state[6:9]}"
