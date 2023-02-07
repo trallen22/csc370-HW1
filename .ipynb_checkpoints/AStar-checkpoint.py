@@ -12,6 +12,8 @@ def AStarH1(startBoard, maxDepth=0):
     while not (stateQueue.empty()):
         curState = stateQueue.get()[2]
         visited.append(curState.state)
+        print("TESTING STATE: ")
+        print(curState)
         if (maxDepth != 0) and (curState.pathCost > maxDepth):
             return [-1, -1]
         if curState.state == GOALSTATE:
