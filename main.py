@@ -22,7 +22,7 @@ colHeaders = ['a', 'b', 'c']
 
 
 
-#print(IDS(b, 5))
+print(IDS(b, 5))
 
 # print(generatePuzzle(3))
 
@@ -43,14 +43,14 @@ colHeaders = ['a', 'b', 'c']
 #     f.write(str(tabulate(data, headers=colHeaders, tablefmt='simple')))
 # print(tabulate(data, headers=colHeaders, tablefmt='simple'))
 
-from sympy import symbols, solve
-xx = symbols('x')
-nodes = 52
-depth = 5
-f = 0
-f -= nodes + 1
-for i in range(depth + 1):
-    f += xx**i
-print(f)
-bfactor = solve(f)
-print(bfactor)
+# from sympy import symbols, solve
+# xx = symbols('x')
+# nodes = 52
+# depth = 5
+# f = 0
+# f -= nodes + 1
+# for i in range(depth + 1):
+#     f += xx**i
+# print(f)
+# bfactor = solve(f)
+# print(bfactor)

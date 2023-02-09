@@ -14,11 +14,11 @@ def IDS(startBoard, maxDepth=0):
             print("CURRENT STATE: ")
             print(curState)
             if curState.state == GOALSTATE:
-                return curState.pathCost
+                return [nodes, curState.pathCost]
             if curState.pathCost < i:
                 for j in range(len(curState.getNextStates())):
                     nextState = curState.getNextStates()[j]
                     nodes += 1
                     if not (nextState.state in visited or nextState in stack):
                         stack.append(nextState)
-    return False
+    return [-1, -1]
