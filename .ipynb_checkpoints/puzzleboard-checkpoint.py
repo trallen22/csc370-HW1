@@ -79,7 +79,7 @@ class PuzzleBoard:
             nextStates.append(PuzzleBoard(tempState, self.pathCost + 1))
         return nextStates
             
-    
+    # checks to make sure number of inversions is even
     def solvable(self):
         count = 0
         tempState = self.state.copy()
