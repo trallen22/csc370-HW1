@@ -8,17 +8,17 @@ def AStarH1(startBoard, maxDepth=0):
     order = 1
     stateQueue = PriorityQueue()
     stateQueue.put((0, 0, startBoard))
-    visited = []
+    visited = set()
     while not (stateQueue.empty()):
         curState = stateQueue.get()[2]
-        visited.append(curState.state)
+        visited.add(''.join(map(str, curState.state)))
         if (maxDepth != 0) and (curState.pathCost > maxDepth):
             return [-1, -1]
         if curState.state == GOALSTATE:
             return [nodesCreated, curState.pathCost]
         for i in range(len(curState.getNextStates())):
             nextState = curState.getNextStates()[i]
-            if not (nextState.state in visited):
+            if not (''.join(map(str, nextState.state)) in visited):
                 stateQueue.put((nextState.pathCost + nextState.h1(), order, nextState))
                 order += 1
             nodesCreated += 1

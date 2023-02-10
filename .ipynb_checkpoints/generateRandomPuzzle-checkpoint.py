@@ -8,7 +8,7 @@ from tqdm import tqdm
     
 def batchPuzzles(size):
     puzzleDict = {}
-    # visited = []
+    visited = {}
     checked = 0
     depths = list(range(2, 25, 2))
     pbar = tqdm(desc='While loop', total = size)
@@ -16,23 +16,26 @@ def batchPuzzles(size):
         initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
         random.shuffle(initialBoard)
         curPuzzle = PuzzleBoard(initialBoard, 0)
-        # if not (initialBoard in visited):
-        #     visited.append(initialBoard)
         if (curPuzzle.solvable()):
-            solved = AStarH1(curPuzzle, max(depths))
+            try:
+                solved = visited[''.join(map(str, curPuzzle.state))]
+            except KeyError:
+                solved = AStarH1(curPuzzle, max(depths))
+                visited[(''.join(map(str, curPuzzle.state)))] = solved
             solveDepth = solved[1]
-            if (solveDepth % 2 == 0):
-                if solveDepth in puzzleDict:
+            if (solveDepth % 2 == 0) and (solveDepth > 0):
+                pbar.update(1)
+                checked += 1
+                try:
                     if (len(puzzleDict[solveDepth]) <= 99):
                         puzzleDict[solveDepth].append(solved[0])
-                        checked += 1
-                        pbar.update(1)
                         if len(puzzleDict[solveDepth]) == 100:
                             depths.remove(solveDepth)
-                else:
+                except KeyError:
                     puzzleDict[solveDepth] = [solved[0]]
-                    checked += 1
-                    pbar.update(1)
-                print("DICTIONARY: ")
-                print(puzzleDict)
+            if solveDepth == 2:
+                print("SOLVE DEPTH 2: ")
+                print(curPuzzle.state)
+                print("len of list of boards for 2") 
+                print(len(puzzleDict[2]))
     return puzzleDict

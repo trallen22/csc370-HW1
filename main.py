@@ -17,12 +17,8 @@ print("INITIAL STATES: ")
 print(b)
 print(b.solvable())
 
-data = [[0, 23, 4], [4,2,1]]
-colHeaders = ['a', 'b', 'c']
 
-
-
-print(IDS(b, 5))
+# print(IDS(b, 5))
 
 # print(generatePuzzle(3))
 
@@ -30,18 +26,17 @@ print(IDS(b, 5))
 
 # print(AStarH2(b))
 
-# x = batchPuzzles(1200) 
-# data = []
-# for i in range(2, 25, 2):
-#     try:
-#         data.append([i, sum(x[i]) / len(x[i]), len(x[i])])
-#     except:
-#         data.append([i, 'na', 0])
-# colHeaders = ['d', 'A*(h1)', 'total']
-# with open("newFile.txt", 'a') as f:
-#     f.write('another \n')
-#     f.write(str(tabulate(data, headers=colHeaders, tablefmt='simple')))
-# print(tabulate(data, headers=colHeaders, tablefmt='simple'))
+x = batchPuzzles(1200) 
+data = []
+for i in range(2, 25, 2):
+    try:
+        data.append([i, sum(x[i]) / len(x[i]), len(x[i])])
+    except:
+        data.append([i, 'na', 0])
+colHeaders = ['d', 'A*(h1)', 'total']
+with open("newFile.txt", 'a') as f:
+    f.write(str(tabulate(data, headers=colHeaders, tablefmt='simple')))
+print(tabulate(data, headers=colHeaders, tablefmt='simple'))
 
 # from sympy import symbols, solve
 # xx = symbols('x')
