@@ -11,7 +11,7 @@ def batchPuzzles(size):
     visited = {}
     checked = 0
     depths = list(range(2, 25, 2))
-    pbar = tqdm(desc='While loop', total = size)
+    pbar = tqdm(desc='puzzles solved', total = size)
     while checked < size:
         initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
         random.shuffle(initialBoard)
@@ -24,18 +24,15 @@ def batchPuzzles(size):
                 visited[(''.join(map(str, curPuzzle.state)))] = solved
             solveDepth = solved[1]
             if (solveDepth % 2 == 0) and (solveDepth > 0):
-                pbar.update(1)
-                checked += 1
                 try:
-                    if (len(puzzleDict[solveDepth]) <= 99):
+                    if (len(puzzleDict[solveDepth]) < 100):
                         puzzleDict[solveDepth].append(solved[0])
                         if len(puzzleDict[solveDepth]) == 100:
                             depths.remove(solveDepth)
+                        pbar.update(1)
+                        checked += 1
                 except KeyError:
                     puzzleDict[solveDepth] = [solved[0]]
-            if solveDepth == 2:
-                print("SOLVE DEPTH 2: ")
-                print(curPuzzle.state)
-                print("len of list of boards for 2") 
-                print(len(puzzleDict[2]))
+                    pbar.update(1)
+                    checked += 1
     return puzzleDict
