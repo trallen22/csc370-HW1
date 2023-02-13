@@ -1,3 +1,4 @@
+# PuzzleBoard object to represent an 8-puzzle
 class PuzzleBoard:
     def __init__(self, state, pathCost):
         self.state = state
@@ -93,5 +94,6 @@ class PuzzleBoard:
         else:
             return True 
     
+    # prints a 3x3 string representation of the puzzle board
     def __str__(self):
         return f"{self.state[:3]}\n{self.state[3:6]}\n{self.state[6:9]}"
