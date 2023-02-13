@@ -2,49 +2,54 @@ from queue import PriorityQueue
 
 
 # concept of A* using h1
-def AStarH1(startBoard, maxDepth=0):
-    GOALSTATE = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+def AStar(startBoard, heuristic, maxDepth=0):
+    GOALSTATE = [0, 1, 2, 3, 4, 5, 6, 7, 8] # what we compare our current state to
     nodesCreated = 1
     order = 1
-    stateQueue = PriorityQueue()
-    stateQueue.put((0, 0, startBoard))
-    visited = set()
+    stateQueue = PriorityQueue() # priority queue of board states
+    stateQueue.put((0, 0, startBoard)) # priority queue compares by (path cost, order, curstate)
+    visited = set() # using set to increase search time 
     while not (stateQueue.empty()):
         curState = stateQueue.get()[2]
-        visited.add(''.join(map(str, curState.state)))
+        visited.add(''.join(map(str, curState.state))) # set can't hold list so have to convert to string
         if (maxDepth != 0) and (curState.pathCost > maxDepth):
             return [-1, -1]
         if curState.state == GOALSTATE:
             return [nodesCreated, curState.pathCost]
+        # generates the next possible board states 
         for i in range(len(curState.getNextStates())):
-            nextState = curState.getNextStates()[i]
+            nextState = curState.getNextStates()[i] 
             if not (''.join(map(str, nextState.state)) in visited):
-                stateQueue.put((nextState.pathCost + nextState.h1(), order, nextState))
+                # checks which heuristic to use
+                if heuristic == 'h1':
+                    stateQueue.put((nextState.pathCost + nextState.h1(), order, nextState))
+                else:
+                    stateQueue.put((nextState.pathCost + nextState.h2(), order, nextState))
                 order += 1
-            nodesCreated += 1
+            nodesCreated += 1 # keeps track of total nodes created
     return [nodesCreated, curState.pathCost]
 
 
-# concept of A* using h2
-def AStarH2(startBoard):
-    GOALSTATE = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    nodesCreated = 1
-    order = 1
-    stateQueue = PriorityQueue()
-    stateQueue.put((0, 0, startBoard))
-    visited = []
-    while not (stateQueue.empty()):
-        curState = stateQueue.get()[2]
-        visited.append(curState.state)
-        if (maxDepth != 0) and (curState.pathCost > maxDepth):
-            return [-1, -1]
-        if curState.state == GOALSTATE:
-            return [nodesCreated, curState.pathCost]
-        for i in range(len(curState.getNextStates())):
-            nextState = curState.getNextStates()[i]
-            if not (nextState.state in visited):
-                stateQueue.put((nextState.pathCost + nextState.h2(), order, nextState))
-                order += 1
-            nodesCreated += 1
-    return [nodesCreated, curState.pathCost]
+# # concept of A* using h2
+# def AStarH2(startBoard):
+#     GOALSTATE = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+#     nodesCreated = 1
+#     order = 1
+#     stateQueue = PriorityQueue()
+#     stateQueue.put((0, 0, startBoard))
+#     visited = []
+#     while not (stateQueue.empty()):
+#         curState = stateQueue.get()[2]
+#         visited.append(curState.state)
+#         if (maxDepth != 0) and (curState.pathCost > maxDepth):
+#             return [-1, -1]
+#         if curState.state == GOALSTATE:
+#             return [nodesCreated, curState.pathCost]
+#         for i in range(len(curState.getNextStates())):
+#             nextState = curState.getNextStates()[i]
+#             if not (nextState.state in visited):
+#                 stateQueue.put((nextState.pathCost + nextState.h2(), order, nextState))
+#                 order += 1
+#             nodesCreated += 1
+#     return [nodesCreated, curState.pathCost]
 

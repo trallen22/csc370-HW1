@@ -1,6 +1,6 @@
 from queue import PriorityQueue
 from puzzleboard import PuzzleBoard
-from AStar import AStarH1, AStarH2
+from AStar import AStar
 from generateRandomPuzzle import batchPuzzles
 from tabulate import tabulate 
 from ids import IDS
@@ -11,32 +11,57 @@ initialState = [1, 4, 2,
                 3, 5, 8, 
                 6, 7, 0]
 
-b = PuzzleBoard(initialState, 0)
+# b = PuzzleBoard(initialState, 0)
 
-print("INITIAL STATES: ")
-print(b)
-print(b.solvable())
+# print("INITIAL STATES: ")
+# print(b)
+# print(b.solvable())
 
-
-# print(IDS(b, 5))
-
-# print(generatePuzzle(3))
-
-# print(AStarH1(b))
-
-# print(AStarH2(b))
-
-x = batchPuzzles(1200) 
-data = []
-for i in range(2, 25, 2):
+ids = batchPuzzles(600, 'ids')
+idsdata = []
+for i in range(2, 13, 2):
     try:
-        data.append([i, sum(x[i]) / len(x[i]), len(x[i])])
+        idsdata.append([i, sum(ids[i]) / len(ids[i]), len(ids[i])])
     except:
-        data.append([i, 'na', 0])
-colHeaders = ['d', 'A*(h1)', 'total']
+        idsdata.append([i, 'na', 0])
+idscolHeaders = ['d', 'IDS', 'total ids']
 with open("newFile.txt", 'a') as f:
-    f.write(str(tabulate(data, headers=colHeaders, tablefmt='simple')))
-print(tabulate(data, headers=colHeaders, tablefmt='simple'))
+    f.write(str(tabulate(idsdata, headers=idscolHeaders, tablefmt='simple')))
+print(tabulate(idsdata, headers=idscolHeaders, tablefmt='simple'))
+        
+# h1 = batchPuzzles(1200, 'h1') 
+# h2 = batchPuzzles(1200, 'h2')
+# ids = batchPuzzles(600, 'ids')
+
+# h1data = []
+# h2data = []
+# idsdata = []
+# for i in range(2, 25, 2):
+#     try:
+#         h1data.append([i, sum(h1[i]) / len(h1[i]), len(h1[i])])
+#     except:
+#         h1data.append([i, 'na', 0])
+#     try:
+#         h2data.append([i, sum(h2[i]) / len(h2[i]), len(h2[i])])
+#     except:
+#         h2data.append([i, 'na', 0])
+# for i in range(2, 13, 2):
+#     try:
+#         idsdata.append([i, sum(ids[i]) / len(ids[i]), len(ids[i])])
+#     except:
+#         idsdata.append([i, 'na', 0])
+# h1colHeaders = ['d', 'A*(h1)', 'total h1']
+# h2colHeaders = ['d', 'A*(h2)', 'total h2']
+# idscolHeaders = ['d', 'IDS', 'total ids']
+# with open("newFile.txt", 'a') as f:
+#     f.write(str(tabulate(h1data, headers=h1colHeaders, tablefmt='simple')))
+#     f.write(str(tabulate(h2data, headers=h2colHeaders, tablefmt='simple')))
+#     f.write(str(tabulate(idsdata, headers=idscolHeaders, tablefmt='simple')))
+# print(tabulate(h1data, headers=h1colHeaders, tablefmt='simple'))
+# print()
+# print(tabulate(h2data, headers=h2colHeaders, tablefmt='simple'))
+# print()
+# print(tabulate(idsdata, headers=idscolHeaders, tablefmt='simple'))
 
 # from sympy import symbols, solve
 # xx = symbols('x')
