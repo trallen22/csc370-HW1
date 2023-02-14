@@ -8,10 +8,10 @@ from ids import IDS
 
 # Generates a certain number of puzzleBoards and creates a dictionary with specified depths 
 # as the keys and a list of the number of nodes created for each solved board at that depth. 
-# parameters - 
+# parameters: 
 #     size - integer the total number of puzzleBoards with the specified depths 
 #     heuristic - string for which heuristic to use when solving each puzzleBoard 
-# returns - returns a dictionary with solve depths as the keys and the number of nodes 
+# returns: returns a dictionary with solve depths as the keys and the number of nodes 
 #           created for the puzzleBoards with that solve depth
 def batchPuzzles(size, heuristic):
     puzzleDict = {} # dictionary to hold -> {solve depth: a list of nodes created for all solved boards with same solve depth}

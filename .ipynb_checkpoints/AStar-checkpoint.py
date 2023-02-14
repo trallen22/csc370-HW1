@@ -2,11 +2,11 @@ from queue import PriorityQueue
 
 
 # concept of A*
-# parameters - 
+# parameters: 
 #     startBoard - initial puzzleBoard object
-#     heuristic - string for current heuristic -> 'h1', 'h2', 'ids'
+#     heuristic - string for current heuristic -> 'h1', 'h2'
 #     maxDepth - integer max depth to search for a solution; default 0 means no max depth
-# returns - returns a list of total nodes created while running the algorithm
+# returns: returns a list of total nodes created while running the algorithm
 #           and the pathCost (representing depth) of the solution puzzleBoard 
 def AStar(startBoard, heuristic, maxDepth=0):
     GOALSTATE = [0, 1, 2, 3, 4, 5, 6, 7, 8] # what we compare our current state to
